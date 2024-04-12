@@ -1,31 +1,40 @@
-// Import Swiper React components
+import { Autoplay, Pagination } from "swiper/modules";
+import { headerSlider } from "../../data/data";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
-
-// import required modules
-import { Pagination } from "swiper/modules";
-import { headerSlider } from "../../data/data";
+``;
 const Headerslider = () => {
   return (
     <>
       <Swiper
-        direction={"horizontal"}
+        direction={"vertical"}
         pagination={{
           clickable: true,
         }}
-        modules={[Pagination]}
-        className=""
+        modules={[Pagination, Autoplay]}
+        className="mySwiper"
         slidesPerView={1}
+        spaceBetween={0}
+        style={{ width: "100%", height: "500px", position: "relative" }}
+        loop
+        autoplay
       >
         {headerSlider.map((item, index) => (
           <SwiperSlide key={index}>
-            <img src={item.imgSrc} alt="" className="w-full relative h-screen object-cover" />
-            <div className="absolute top-52 left-14 ">
-              <h2>{item.name}</h2>
-              <div>{item.description}</div>
+            <div
+              className="h-full w-full relative"
+              style={{
+                backgroundImage: `url(${item.imgSrc})`,
+                backgroundSize: "cover",
+              }}
+            >
+              <div className="absolute top-0 left-0 h-full w-full bg-black opacity-45"></div>
+              <div className="text-white pt-32 pl-32">
+                <h1 className="text-5xl font-black mb-6">{item.name}</h1>
+                <div className="w-1/2 text-xl font-medium">{item.description}</div>
+              </div>
             </div>
           </SwiperSlide>
         ))}
